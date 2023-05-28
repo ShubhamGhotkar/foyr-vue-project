@@ -1,0 +1,65 @@
+<template>
+  <the-container>
+    <div class="referal_container">
+      <div class="info">
+        <h2 class="info_heading">NEO Referral Program</h2>
+        <p class="info_para">
+          Earn rewards worth upto $100 every time a friend of yours subscribes
+          to Foyr Neo
+        </p>
+        <span ><router-link to="/refer-to-friend" class="ref-btn">Refer Now</router-link></span>
+      </div>
+      <div class="image">
+        <img
+          src="../assets/refer-img.png"
+          alt="refer-image"
+          class="ref-image"
+        />
+      </div>
+    </div>
+  </the-container>
+</template>
+
+<script>
+import TheContainer from "./TheContainer.vue";
+
+export default {
+  components: { TheContainer },
+};
+</script>
+
+<style scoped>
+.referal_container {
+  display: flex;
+  justify-content: space-between;
+  padding: 7rem 0;
+}
+.info {
+  flex: 0 0 40%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.3rem;
+}
+
+.info span{
+    margin-top: 2rem;
+}
+.info_heading {
+  font-size: 4rem;
+}
+.info_para {
+  font-size: 2.4rem;
+  padding: 0 15rem 0 0;
+  line-height: 1.4;
+}
+.image {
+  flex: 0 0 50%;
+
+  display: grid;
+  place-items: center;
+}
+.ref-image {
+  width: 70%;
+}
+</style>
