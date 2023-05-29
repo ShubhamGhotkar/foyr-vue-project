@@ -22,7 +22,6 @@ body {
 }
 
 .ref-btn {
-  /* width: 10rem; */
   color: white;
   background-color: #3792a6;
   padding: 1.3rem 2.3rem;
@@ -34,5 +33,26 @@ body {
 }
 .ref-btn:hover {
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover,
+a:visited,
+a:active {
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 1064px) {
+  html {
+    font-size: 8px;
+  }
+}
+@media only screen and (max-width: 380px) {
+  html {
+    font-size: 7px;
+  }
 }
 </style>

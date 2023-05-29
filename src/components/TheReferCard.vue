@@ -42,6 +42,7 @@ export default {
   methods: {
     setShow() {
       this.show = false;
+      this.$emit("show-emit", this.show);
     },
   },
 };

@@ -77,7 +77,6 @@ export default {
 
 <style scoped>
 .faq_section {
-  /* margin-top: 10rem; */
   min-height: 100vh;
   background-color: whitesmoke;
 }

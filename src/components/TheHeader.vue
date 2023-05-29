@@ -24,6 +24,40 @@
             </li>
           </ul>
         </div>
+        <!-- media Query button -->
+        <div class="responsive_btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="res-btn"
+            @click="setShowNav"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div class="header--nav2" v-if="showNav">
+        <ul>
+          <li><router-link to="/home">Home</router-link></li>
+          <li><router-link to="/reward">Rewards</router-link></li>
+          <li>
+            <router-link to="/track-progress">Track Progress</router-link>
+          </li>
+          <li><router-link to="/faqs">FAQs</router-link></li>
+          <li>
+            <router-link to="/refer-to-friend" class="ref-btn"
+              >Refer Now</router-link
+            >
+          </li>
+        </ul>
       </div>
     </the-container-vue>
   </header>
@@ -34,13 +68,19 @@ import TheContainerVue from "./TheContainer.vue";
 
 export default {
   data() {
-    return {};
+    return {
+      showNav: false,
+    };
   },
   components: {
     TheContainerVue,
   },
 
-  methods: {},
+  methods: {
+    setShowNav() {
+      this.showNav = !this.showNav;
+    },
+  },
 };
 </script>
 
@@ -81,6 +121,7 @@ li {
 
   display: grid;
   place-items: center;
+  z-index: 89898998;
 }
 
 .header_logo--logo {
@@ -88,5 +129,44 @@ li {
 }
 .header--nav {
   margin-right: 2rem;
+}
+
+.responsive_btn {
+  height: 3.4rem;
+  width: 3.4rem;
+  display: none;
+}
+
+.res-btn {
+  height: 100%;
+  width: 100%;
+}
+
+.header--nav2 {
+  transition: all 3s ease-in;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+.header--nav2 ul {
+  width: 100vw;
+  list-style: none;
+
+  display: grid;
+  place-items: center;
+  gap: 3rem;
+
+  background-color: white;
+  padding: 3rem 0;
+}
+
+/* Media Query */
+@media only screen and (max-width: 650px) {
+  .responsive_btn {
+    display: block;
+  }
+  .header_container ul {
+    display: none;
+  }
 }
 </style>

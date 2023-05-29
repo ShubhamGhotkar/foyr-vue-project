@@ -7,7 +7,11 @@
           Earn rewards worth upto $100 every time a friend of yours subscribes
           to Foyr Neo
         </p>
-        <span ><router-link to="/refer-to-friend" class="ref-btn">Refer Now</router-link></span>
+        <span
+          ><router-link to="/refer-to-friend" class="ref-btn"
+            >Refer Now</router-link
+          ></span
+        >
       </div>
       <div class="image">
         <img
@@ -42,8 +46,8 @@ export default {
   gap: 2.3rem;
 }
 
-.info span{
-    margin-top: 2rem;
+.info span {
+  margin-top: 2rem;
 }
 .info_heading {
   font-size: 4rem;
@@ -61,5 +65,31 @@ export default {
 }
 .ref-image {
   width: 70%;
+}
+
+@media only screen and (max-width: 1344px) {
+  .info_para {
+    padding: 0 11rem 0 0;
+  }
+}
+@media only screen and (max-width: 1240px) {
+  .info_para {
+    padding: 0 6.9rem 0 0;
+  }
+}
+@media only screen and (max-width: 950px) {
+  .referal_container {
+    flex-direction: column-reverse;
+    gap: 10rem;
+  }
+
+  .info {
+    text-align: center;
+  }
+
+  .info_para {
+    text-align: center;
+    padding: 0 1rem;
+  }
 }
 </style>
