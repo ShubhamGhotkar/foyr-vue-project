@@ -4,15 +4,15 @@ import TheHome from "../views/TheHome.vue";
 import TheRewards from "../views/TheRewards.vue";
 import TheFAQs from "../views/TheFAQs.vue";
 import TheTrackProgress from "../views/TheTrackProgress.vue";
-import TheReferPage from "@/views/TheReferPage.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: TheHome,
+    redirect: "/home",
+    // name: "home",
+    // component: TheHome,
   },
   {
     path: "/home",
@@ -33,11 +33,6 @@ const routes = [
     path: "/track-progress",
     name: "track-progress",
     component: TheTrackProgress,
-  },
-  {
-    path: "/refer-to-friend",
-    name: "refer-to-friend",
-    component: TheReferPage,
   },
 ];
 

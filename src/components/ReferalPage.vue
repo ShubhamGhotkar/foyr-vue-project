@@ -1,34 +1,26 @@
 <template>
-  <the-container>
-    <div class="referal_container">
-      <div class="info">
-        <h2 class="info_heading">NEO Referral Program</h2>
-        <p class="info_para">
-          Earn rewards worth upto $100 every time a friend of yours subscribes
-          to Foyr Neo
-        </p>
-        <span
-          ><router-link to="/refer-to-friend" class="ref-btn"
-            >Refer Now</router-link
-          ></span
-        >
-      </div>
-      <div class="image">
-        <img
-          src="../assets/refer-img.png"
-          alt="refer-image"
-          class="ref-image"
-        />
-      </div>
+  <div class="referal_container center">
+    <div class="info">
+      <h2 class="info_heading">NEO Referral Program</h2>
+      <p class="info_para">
+        Earn rewards worth upto $100 every time a friend of yours subscribes to
+        Foyr Neo
+      </p>
+      <span><button class="main-btn ref-btn" @click="handleClick">Refer Now</button></span>
     </div>
-  </the-container>
+    <div class="image">
+      <img src="../assets/refer-img.png" alt="refer-image" class="ref-image" />
+    </div>
+  </div>
 </template>
 
 <script>
-import TheContainer from "./TheContainer.vue";
-
 export default {
-  components: { TheContainer },
+  methods:{
+    handleClick(){
+      this.$store.commit('showCard');
+    }
+  }
 };
 </script>
 
@@ -65,6 +57,10 @@ export default {
 }
 .ref-image {
   width: 70%;
+}
+
+.ref-btn {
+  border: none;
 }
 
 @media only screen and (max-width: 1344px) {

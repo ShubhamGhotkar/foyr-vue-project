@@ -1,7 +1,7 @@
 <template>
-  <header>
-    <the-container-vue>
-      <div class="header_container">
+  <section>
+    <header>
+      <div class="header_container center">
         <div class="header_logo">
           <img
             src="../assets/logos.png"
@@ -11,17 +11,10 @@
         </div>
         <div class="header--nav">
           <ul>
-            <li><router-link to="/home">Home</router-link></li>
-            <li><router-link to="/reward">Rewards</router-link></li>
-            <li>
-              <router-link to="/track-progress">Track Progress</router-link>
+            <li v-for="(data, index) in routerData" :key="index">
+              <router-link :to="data.path">{{ data.tittle }}</router-link>
             </li>
-            <li><router-link to="/faqs">FAQs</router-link></li>
-            <li>
-              <router-link to="/refer-to-friend" class="ref-btn"
-                >Refer Now</router-link
-              >
-            </li>
+            <li class="main-btn" @click="handleClick">Refer Now</li>
           </ul>
         </div>
         <!-- media Query button -->
@@ -59,26 +52,46 @@
           </li>
         </ul>
       </div>
-    </the-container-vue>
-  </header>
+    </header>
+  </section>
 </template>
 
 <script>
-import TheContainerVue from "./TheContainer.vue";
-
+// import ReferCard from "./ReferCard.vue";
 export default {
+  // components: { ReferCard },
   data() {
     return {
+      routerData: [
+        {
+          tittle: "Home",
+          path: "/home",
+        },
+        {
+          tittle: "Rewards",
+          path: "/reward",
+        },
+        {
+          tittle: "Track Progress",
+          path: "/track-progress",
+        },
+        {
+          tittle: "FAQs",
+          path: "/faqs",
+        },
+      ],
       showNav: false,
+      isCardShow: this.$store.state.isCardShow,
     };
-  },
-  components: {
-    TheContainerVue,
   },
 
   methods: {
     setShowNav() {
       this.showNav = !this.showNav;
+    },
+
+    handleClick() {
+      this.$store.commit('showCard');
     },
   },
 };

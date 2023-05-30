@@ -1,9 +1,23 @@
 <template>
-  <router-view></router-view>
+  <div>
+    <the-header></the-header>
+    <router-view></router-view>
+    <ReferCard v-if="0"></ReferCard>
+  </div>
 </template>
 
 <script>
-export default {};
+import TheHeader from "./components/TheHeader.vue";
+import ReferCard from "./components/ReferCard.vue";
+
+export default {
+  components: { TheHeader, ReferCard },
+  data() {
+    return {
+      show: false,
+    };
+  },
+};
 </script>
 
 <style>
@@ -19,20 +33,26 @@ html {
 }
 body {
   overflow-x: hidden;
+  background-color: whitesmoke;
 }
 
-.ref-btn {
+.main-btn {
   color: white;
   background-color: #3792a6;
   padding: 1.3rem 2.3rem;
   border-radius: 100px;
   font-size: 1.8rem;
-
+  cursor: pointer;
   font-weight: 550;
   font-family: sans-serif;
 }
-.ref-btn:hover {
-  cursor: pointer;
+.btn:hover {
+  background-color: #4eaabf;
+}
+
+.center {
+  width: 90vw;
+  margin: 0 auto;
 }
 
 a {
@@ -54,5 +74,19 @@ a:active {
   html {
     font-size: 7px;
   }
+}
+
+.article {
+  position: fixed;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.332);
+}
+
+.hide {
+  display: none;
 }
 </style>

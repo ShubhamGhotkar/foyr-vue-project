@@ -1,17 +1,17 @@
 <template>
-  <section>
-    <the-header-vue></the-header-vue>
-    <h2 class="heading"></h2>
-    <questio-carousel :Datas="Datas"></questio-carousel>
+  <section class="faq-section">
+    <div class="center">
+      <h2 class="heading">Frequently Asked Questions</h2>
+      <questio-carousel :Datas="Datas" />
+    </div>
   </section>
 </template>
 
 <script>
-import TheHeaderVue from "@/components/TheHeader.vue";
-import QuestioCarousel from "@/components/TheFAQsCarousel.vue";
+import QuestioCarousel from "@/components/FAQsCarousel.vue";
 
 export default {
-  components: { TheHeaderVue, QuestioCarousel },
+  components: { QuestioCarousel },
   data() {
     return {
       Datas: [
@@ -31,4 +31,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.faq-section {
+  width: 100vw;
+  background-color: whitesmoke;
+}
+
+.heading {
+  font-size: 3.2rem;
+  padding: 9rem 0 4rem 0;
+}
+</style>
