@@ -1,6 +1,5 @@
 <template>
   <section class="faq_section">
-    <!-- <div class="faq_container"> -->
     <div
       class="carousel_container center"
       v-for="(data, index) in Datas"
@@ -50,7 +49,6 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
   </section>
 </template>
 
@@ -78,8 +76,14 @@ export default {
 }
 
 .btn {
-  height: 2.4rem;
-  width: 2.4rem;
+  height: 3.2rem;
+  width: 3.2rem;
+  stroke: rgb(209, 206, 206);
+}
+
+.btn:hover {
+  background-color: white;
+  cursor: pointer;
 }
 .carousel_container {
   transition: all 1s ease-in-out;
@@ -99,7 +103,7 @@ export default {
   font-size: 2.2rem;
 }
 .carousel_para {
-  font-size: 1.7rem;
+  font-size: 2rem;
   line-height: 1.5;
   padding: 1rem 3rem 1rem 0;
 }

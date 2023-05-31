@@ -17,7 +17,7 @@
       ></ProgressStep>
       <div class="claim">
         <div class="cliam_img">
-          <img src="" alt="claim box" />
+          <img src="../assets/rewards-img1.png" alt="claim-box-img" />
         </div>
         <div class="claim-info">
           <div class="claim-para">Rewards Awailable</div>
@@ -41,23 +41,55 @@ export default {
 </script>
 
 <style scoped>
+.progress_container {
+  background-color: white;
+  padding: 1rem 4rem 1.5rem 4rem;
+  border-radius: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+/* Info */
+.info {
+  display: flex;
+  font-size: 1.6rem;
+  gap: 10rem;
+  padding-top: 1rem;
+}
+
+.info span {
+  font-weight: 300;
+  color: rgb(162, 159, 159);
+}
+.info strong {
+  font-weight: 600;
+}
+
+/* Progress */
+.progress {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+
+/* claim */
 .claim {
-  flex: 0 0 18%;
+  flex: 0 0 15%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  transform: translateY(-25%);
+  margin-left: -4.5rem;
 }
 .cliam_img {
   height: 10rem;
   width: 10rem;
-  background-color: purple;
 }
 
-.claim_img img {
-  width: 100%;
+.claim img {
+  height: 100%;
 }
 
 .claim-para {
@@ -76,34 +108,41 @@ export default {
 }
 
 /*  */
-.progress {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 0.2rem;
-}
-/* Info */
-.info {
-  display: flex;
-  font-size: 1.6rem;
-  gap: 10rem;
-  margin: 2rem 0 4rem 1.8rem;
-}
 
-.info span {
-  font-weight: 300;
-  color: rgb(162, 159, 159);
+@media only screen and (max-width: 770px) {
+  .claim {
+    margin-left: -2.5rem;
+    justify-content: center;
+  }
+  .claim-btn {
+    padding: 0.5rem 1rem;
+  }
+  .info {
+    gap: 7rem;
+  }
 }
-.info strong {
-  font-weight: 600;
+@media only screen and (max-width: 690px) {
+  .claim {
+    margin-left: 0rem;
+    justify-content: center;
+  }
+  .claim-btn {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
+  .info {
+    gap: 5rem;
+  }
+  .cliam_img {
+    height: 8rem;
+    width: 8rem;
+  }
 }
-
-/*  */
-
-.progress_container {
-  background-color: white;
-  padding: 1rem 3rem 0;
-  border-radius: 1.2rem;
-  margin-bottom: 7rem;
+@media only screen and (max-width: 560px) {
+  .cliam_img {
+    height: 6rem;
+    width: 6rem;
+    transform: translateY(10%);
+  }
 }
 </style>

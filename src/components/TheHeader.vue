@@ -39,17 +39,14 @@
 
       <div class="header--nav2" v-if="showNav">
         <ul>
-          <li><router-link to="/home">Home</router-link></li>
-          <li><router-link to="/reward">Rewards</router-link></li>
-          <li>
-            <router-link to="/track-progress">Track Progress</router-link>
+          <li
+            v-for="(data, index) in routerData"
+            :key="index"
+            @click="setShowNav"
+          >
+            <router-link :to="data.path">{{ data.tittle }}</router-link>
           </li>
-          <li><router-link to="/faqs">FAQs</router-link></li>
-          <li>
-            <router-link to="/refer-to-friend" class="ref-btn"
-              >Refer Now</router-link
-            >
-          </li>
+          <li class="ref-btn" @click="handleClick">Refer Now</li>
         </ul>
       </div>
     </header>
@@ -57,9 +54,7 @@
 </template>
 
 <script>
-// import ReferCard from "./ReferCard.vue";
 export default {
-  // components: { ReferCard },
   data() {
     return {
       routerData: [
@@ -91,7 +86,7 @@ export default {
     },
 
     handleClick() {
-      this.$store.commit('showCard');
+      this.$store.commit("setCardShow");
     },
   },
 };
@@ -103,8 +98,9 @@ header {
   height: 7.2rem;
   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1);
   background-color: white;
+  z-index: 99;
 
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
 }
@@ -165,14 +161,21 @@ li {
   width: 100vw;
   list-style: none;
 
-  display: grid;
-  place-items: center;
-  gap: 3rem;
-
-  background-color: white;
+  background-color: whitesmoke;
   padding: 3rem 0;
+  border-radius: 0 0 1.2rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.3rem;
 }
 
+.header--nav2 ul li {
+  margin-left: 10rem;
+}
+
+.ref-btn {
+  color: purple;
+}
 /* Media Query */
 @media only screen and (max-width: 650px) {
   .responsive_btn {

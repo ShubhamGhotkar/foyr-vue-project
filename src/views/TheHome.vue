@@ -13,6 +13,7 @@ export default {
 
 <style scoped>
 .home-section {
+  margin-top: 9rem;
   background: white;
 }
 </style>

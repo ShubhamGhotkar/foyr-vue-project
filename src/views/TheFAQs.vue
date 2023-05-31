@@ -34,11 +34,12 @@ export default {
 <style scoped>
 .faq-section {
   width: 100vw;
+  padding-top: 5rem;
   background-color: whitesmoke;
 }
 
 .heading {
   font-size: 3.2rem;
-  padding: 9rem 0 4rem 0;
+  padding: 11rem 0 1.5rem 0;
 }
 </style>

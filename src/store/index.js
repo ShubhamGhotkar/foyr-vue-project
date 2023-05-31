@@ -4,9 +4,15 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    isCardShow: false,
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    setCardShow() {
+      this.state.isCardShow = !this.state.isCardShow;
+    },
+  },
   actions: {},
   modules: {},
 });

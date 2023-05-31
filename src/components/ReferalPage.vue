@@ -6,7 +6,11 @@
         Earn rewards worth upto $100 every time a friend of yours subscribes to
         Foyr Neo
       </p>
-      <span><button class="main-btn ref-btn" @click="handleClick">Refer Now</button></span>
+      <span
+        ><button class="main-btn ref-btn" @click="handleClick">
+          Refer Now
+        </button></span
+      >
     </div>
     <div class="image">
       <img src="../assets/refer-img.png" alt="refer-image" class="ref-image" />
@@ -16,11 +20,11 @@
 
 <script>
 export default {
-  methods:{
-    handleClick(){
-      this.$store.commit('showCard');
-    }
-  }
+  methods: {
+    handleClick() {
+      this.$store.commit("setCardShow");
+    },
+  },
 };
 </script>
 

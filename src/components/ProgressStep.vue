@@ -15,7 +15,9 @@
           d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
-      <div :class="getPathStatus"></div>
+      <div class="path">
+        <div v-for="num in 9" :key="num" :class="getPathStatus"></div>
+      </div>
     </div>
     <div class="step-info">
       <span>STEP {{ num }}</span>
@@ -64,18 +66,18 @@ export default {
       const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
         this.data.userTrackProgress;
       if (this.num === 1 && referralEmailSent) {
-        return "path border--gr";
+        return "dash back--gr";
       } else if (this.num === 2 && userSignedUpForFT && referralEmailSent) {
-        return "path border--gr";
+        return "dash back--gr";
       } else if (
         this.num === 3 &&
         userSignedUpForNeo &&
         userSignedUpForFT &&
         referralEmailSent
       ) {
-        return "path border--gr";
+        return "dash back--gr";
       } else {
-        return "path border--or";
+        return "dash back--or";
       }
     },
   },
@@ -89,7 +91,7 @@ export default {
 
 <style>
 .step_container {
-  flex: 0 0 28%;
+  flex: 0 0 29%;
 
   display: flex;
   flex-direction: column;
@@ -105,7 +107,15 @@ export default {
   gap: 1.2rem;
 }
 .path {
-  width: 80%;
+  flex: 0 0 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dash {
+  flex: 0 0 10%;
+  height: 1.5px;
+  background-color: green;
 }
 .step-svg {
   height: 3.8rem;
@@ -129,6 +139,7 @@ export default {
   font-size: 1.4rem;
   font-weight: 500;
 }
+
 /* Common Classes */
 
 .fill {
@@ -138,10 +149,10 @@ export default {
 .unfill {
   stroke: orange;
 }
-.border--gr {
-  border-bottom: 2px dashed green;
+.back--gr {
+  background-color: green;
 }
-.border--or {
-  border-bottom: 2px dashed orange;
+.back--or {
+  background-color: orange;
 }
 </style>

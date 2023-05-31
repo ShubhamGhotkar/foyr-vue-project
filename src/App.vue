@@ -2,7 +2,7 @@
   <div>
     <the-header></the-header>
     <router-view></router-view>
-    <ReferCard v-if="0"></ReferCard>
+    <ReferCard v-if="this.$store.state.isCardShow"></ReferCard>
   </div>
 </template>
 
@@ -33,7 +33,6 @@ html {
 }
 body {
   overflow-x: hidden;
-  background-color: whitesmoke;
 }
 
 .main-btn {
@@ -46,7 +45,7 @@ body {
   font-weight: 550;
   font-family: sans-serif;
 }
-.btn:hover {
+.main-btn:hover {
   background-color: #4eaabf;
 }
 
@@ -74,19 +73,5 @@ a:active {
   html {
     font-size: 7px;
   }
-}
-
-.article {
-  position: fixed;
-
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.332);
-}
-
-.hide {
-  display: none;
 }
 </style>

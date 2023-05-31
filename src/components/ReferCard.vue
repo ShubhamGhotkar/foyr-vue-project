@@ -1,5 +1,5 @@
 <template>
-  <article class="article" @click="setCardShow">
+  <article class="article">
     <div class="referCard_container ref-card">
       <div class="card">
         <h2 class="card-heading">Refer a Friend</h2>
@@ -9,7 +9,9 @@
           class="card-input"
           v-model="inputData"
         />
-        <button class="main-btn button">Send Invite</button>
+        <button class="main-btn button" @click="handleClick">
+          Send Invite
+        </button>
         <p class="card-para">You will recieve upto 50% off on plans!</p>
       </div>
       <div class="card-btn">
@@ -20,6 +22,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="card-btn-svg"
+          @click="handleClick"
         >
           <path
             stroke-linecap="round"
@@ -29,6 +32,7 @@
         </svg>
       </div>
     </div>
+    <div class="blur-div" @click="handleClick"></div>
   </article>
 </template>
 
@@ -36,25 +40,30 @@
 export default {
   data() {
     return {
-      show: this.$store.state.isCardVisible,
       inputData: "",
     };
   },
   methods: {
-    setCardShow() {
-      this.show = false;
-      this.$store.state.isCardVisible = !this.$store.state.isCardVisible;
-    },
-    setCardShowF() {
-      this.$store.state.isCardVisible = false;
+    handleClick() {
+      this.$store.commit("setCardShow");
     },
   },
 };
 </script>
 
 <style scoped>
+.blur-div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgba(0, 0, 0, 0.332);
+}
 .referCard_container {
   width: 50rem;
+  z-index: 199;
 }
 .card {
   width: 50rem;
@@ -76,18 +85,19 @@ export default {
   font-size: 1.6rem;
   font-weight: 500;
 }
-.card-input,
-.card-input:active,
-.card-input:focus,
-.card-input:visited {
+input,
+input:active,
+input:focus,
+input:visited {
   width: 100%;
   padding: 1rem 3.5rem;
   border-radius: 0.8rem;
   border: 0.2rem solid whitesmoke;
   font-size: 1.6rem;
+  outline: none;
 }
 
-.card-input::placeholder {
+input::placeholder {
   font-size: 1.4rem;
   font-weight: 300;
   color: rgb(205, 204, 204);
