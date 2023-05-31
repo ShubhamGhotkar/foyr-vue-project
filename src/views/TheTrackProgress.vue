@@ -24,7 +24,7 @@ export default {
           rewardCollected: false,
           userTrackProgress: {
             referralEmailSent: true,
-            userSignedUpForFT: true,
+            userSignedUpForFT: false,
             userSignedUpForNeo: false,
             rewardsAvailable: false,
           },
@@ -37,7 +37,7 @@ export default {
           userTrackProgress: {
             referralEmailSent: true,
             userSignedUpForFT: true,
-            userSignedUpForNeo: true,
+            userSignedUpForNeo: false,
             rewardsAvailable: false,
           },
         },
@@ -48,9 +48,21 @@ export default {
           rewardCollected: false,
           userTrackProgress: {
             referralEmailSent: true,
-            userSignedUpForFT: false,
-            userSignedUpForNeo: false,
+            userSignedUpForFT: true,
+            userSignedUpForNeo: true,
             rewardsAvailable: false,
+          },
+        },
+        {
+          name: "Referral 4",
+          email: "referraltest1@yopmail.com",
+          refereeId: "63e364099a87b41c72a4f293",
+          rewardCollected: true,
+          userTrackProgress: {
+            referralEmailSent: true,
+            userSignedUpForFT: true,
+            userSignedUpForNeo: true,
+            rewardsAvailable: true,
           },
         },
         {
@@ -61,7 +73,7 @@ export default {
           userTrackProgress: {
             referralEmailSent: true,
             userSignedUpForFT: true,
-            userSignedUpForNeo: false,
+            userSignedUpForNeo: true,
             rewardsAvailable: true,
           },
         },

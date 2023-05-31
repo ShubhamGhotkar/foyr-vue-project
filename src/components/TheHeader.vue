@@ -86,6 +86,9 @@ export default {
     },
 
     handleClick() {
+      if (this.showNav) {
+        this.setShowNav();
+      }
       this.$store.commit("setCardShow");
     },
   },
@@ -161,9 +164,8 @@ li {
   width: 100vw;
   list-style: none;
 
-  background-color: whitesmoke;
+  background-color: white;
   padding: 3rem 0;
-  border-radius: 0 0 1.2rem 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 2.3rem;
@@ -174,7 +176,14 @@ li {
 }
 
 .ref-btn {
-  color: purple;
+  color: #3792a6;
+  display: block;
+  width: max-content;
+  cursor: pointer;
+}
+.ref-btn:hover {
+  color: #4fbcd4;
+  border-bottom: 2px solid #3792a6;
 }
 /* Media Query */
 @media only screen and (max-width: 650px) {

@@ -10,18 +10,41 @@
     </div>
     <div class="progress">
       <ProgressStep
-        v-for="num in 3"
+        v-for="num in NumOfObject"
         :key="num"
         :data="data"
         :num="num"
       ></ProgressStep>
-      <div class="claim">
+      <div class="claim-svg" v-if="!rewardsAvailable">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="svg-icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+
+        <div class="step-info">
+          <span>STEP 4</span>
+          <p>claim available</p>
+        </div>
+      </div>
+      <div class="claim" v-if="rewardsAvailable">
         <div class="cliam_img">
-          <img src="../assets/rewards-img1.png" alt="claim-box-img" />
+          <img src="../assets/Gift Box.svg" alt="claim-box-img" />
         </div>
         <div class="claim-info">
           <div class="claim-para">Rewards Awailable</div>
-          <button class="claim-btn">claim now</button>
+          <button class="claim-btn" :class="!rewardCollected && 'inactive'">
+            claim now
+          </button>
         </div>
       </div>
     </div>
@@ -37,6 +60,19 @@ export default {
     },
   },
   components: { ProgressStep },
+  data() {
+    return {
+      NumOfObject: null,
+      rewardsAvailable: false,
+      rewardCollected: false,
+    };
+  },
+  mounted() {
+    const { rewardCollected, userTrackProgress } = this.data;
+    this.NumOfObject = Object.keys(userTrackProgress).length - 1;
+    this.rewardsAvailable = userTrackProgress.rewardsAvailable;
+    this.rewardCollected = rewardCollected;
+  },
 };
 </script>
 
@@ -70,7 +106,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.2rem;
+  /* gap: 0.2rem; */
 }
 
 /* claim */
@@ -105,8 +141,30 @@ export default {
   background-color: white;
   border: 2px solid rgb(9, 170, 9);
   color: rgb(9, 170, 9);
+  cursor: pointer;
 }
 
+.claim-svg {
+  flex: 0 0 15%;
+  height: max-content;
+  display: grid;
+  align-items: center;
+
+  padding: 4.6rem 0;
+}
+
+.svg-icon {
+  height: 3.8rem;
+  width: 3.8rem;
+  stroke: orange;
+}
+
+.inactive {
+  pointer-events: none;
+  opacity: 0.3;
+  border: 2px solid gray;
+  color: gray;
+}
 /*  */
 
 @media only screen and (max-width: 770px) {

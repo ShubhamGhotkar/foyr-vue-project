@@ -83,7 +83,15 @@ export default {
   },
 
   mounted() {
-    const keys = Object.keys(this.data.userTrackProgress);
+    let keys = Object.keys(this.data.userTrackProgress);
+    keys = keys.map((val) => {
+      val = val.charAt(0).toUpperCase() + val.slice(1);
+      return val
+        .toString()
+        .split(/(?=[A-Z])/)
+        .join(" ");
+    });
+
     this.arr = keys;
   },
 };
@@ -104,12 +112,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
 }
 .path {
-  flex: 0 0 80%;
+  flex: 0 0 90%;
   display: flex;
   justify-content: space-between;
+  height: 1px;
 }
 
 .dash {
