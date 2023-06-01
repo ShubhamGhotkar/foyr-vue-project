@@ -42,9 +42,16 @@
         </div>
         <div class="claim-info">
           <div class="claim-para">Rewards Awailable</div>
-          <button class="claim-btn" :class="!rewardCollected && 'inactive'">
-            claim now
-          </button>
+
+          <router-link to="/reward"
+            ><button
+              class="claim-btn"
+              :class="!rewardCollected && 'inactive'"
+              @click="handleClick"
+            >
+              claim now
+            </button></router-link
+          >
         </div>
       </div>
     </div>
@@ -67,7 +74,14 @@ export default {
       rewardCollected: false,
     };
   },
-  mounted() {
+
+  methods: {
+    handleClick() {
+      this.$store.commit("rewardsAvailable");
+    },
+  },
+
+  beforeMount() {
     const { rewardCollected, userTrackProgress } = this.data;
     this.NumOfObject = Object.keys(userTrackProgress).length - 1;
     this.rewardsAvailable = userTrackProgress.rewardsAvailable;

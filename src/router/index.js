@@ -28,6 +28,7 @@ const routes = [
     path: "/reward",
     name: "reward",
     component: TheRewards,
+    props: true,
   },
   {
     path: "/track-progress",

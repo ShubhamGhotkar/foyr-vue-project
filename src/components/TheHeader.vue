@@ -84,11 +84,7 @@ export default {
     setShowNav() {
       this.showNav = !this.showNav;
     },
-
     handleClick() {
-      if (this.showNav) {
-        this.setShowNav();
-      }
       this.$store.commit("setCardShow");
     },
   },
