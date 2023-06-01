@@ -7,12 +7,7 @@
         :key="reward.id"
       >
         <div class="reward-card_img">
-          <!-- <img :src="reward.path" alt="reward_img" class="rewards--img" /> -->
-          <img
-            src="../assets/KeyFolder.svg"
-            alt="reward_img"
-            class="rewards--img"
-          />
+          <img :src="reward.path" alt="reward_img" class="rewards--img" />
         </div>
         <p class="reward-info">
           <strong>{{ reward.tittle }}</strong>
@@ -23,12 +18,13 @@
     <div :class="getClass">
       <input
         type="radio"
-        name="radio"
-        :value="btn.tittle"
         v-model="selectedOption"
-        v-for="btn in Reawards"
-        :key="btn.id"
+        v-for="reawardBtn in Reawards"
+        :key="reawardBtn.id"
+        :value="reawardBtn.id"
+        :name="reawardBtn.id"
         class="rd-btn"
+        @change="handleChange"
       />
     </div>
   </section>
@@ -40,13 +36,18 @@ export default {
 
   data() {
     return {
-      selectedOption: "",
+      selectedOption: [],
     };
   },
-  mounted() {
-    console.log(this.Reawards);
-  },
 
+  methods: {
+    show() {
+      console.log(this.selectedOption);
+    },
+    handleChange() {
+      this.$emit("radioOptionData", [this.selectedOption]);
+    },
+  },
   computed: {
     getClass() {
       if (this.rewardsAvailable) {

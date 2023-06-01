@@ -4,10 +4,10 @@
     <div class="center">
       <div class="rewards-info">
         <h2 class="rewards-heading">Rewards</h2>
-        <p class="rewards-para" v-if="true">
+        <p class="rewards-para">
           {{
             rewardsAvailable
-              ? ` You have ${totalRewards} rewards available,please claim any of
+              ? ` You have ${rewardsData.rewards} rewards available,please claim any of
           the Reawards below`
               : `These Rewards will be available to you once
           yours friends subscribes to Foyr Neo`
@@ -17,6 +17,7 @@
       <RewardCard
         :Reawards="RewardCardData"
         :rewardsAvailable="rewardsAvailable"
+        @radioOptionData="radioOptionData"
       ></RewardCard>
 
       <span class="span-btn" v-if="!rewardsAvailable"
@@ -38,54 +39,95 @@
 import TheHeader from "@/components/TheHeader.vue";
 import RewardCard from "../components/RewardCard.vue";
 import RewardsAdded from "../components/RewardsAdded.vue";
+import img1 from "../assets/GoldCoinsEur.svg";
+import img2 from "../assets/chair.svg";
+import img3 from "../assets/KeyFolder.svg";
 export default {
-  data() {
-    return {
-      rewardsAvailable: this.$store.state.isRewardsAvailable,
-      rewardCollected: false,
-      totalRewards: 2,
-      isShowPopUp: false,
-      RewardCardData: [
-        {
-          id: "rewards-1",
-          tittle: "$25 Promo Credits",
-          path: "../assets/GoldCoinsEur.svg",
-        },
-        {
-          id: "rewards-2",
-          tittle: "1 Custom Model",
-          path: "../assets/chair.svg",
-        },
-        {
-          id: "rewards-3",
-          tittle: "Acess to Export Floor + Elevation for 1 month",
-          path: "../assets/KeyFolder.svg",
-        },
-      ],
-    };
-  },
-  methods: {
-    handleClick() {
-      this.$store.commit("setCardShow");
-    },
-    showPopUp() {
-      this.isShowPopUp = !this.isShowPopUp;
-      this.$store.commit("isShowPopUp");
-    },
-  },
-
   components: {
     TheHeader,
     RewardCard,
     RewardsAdded,
   },
+  data() {
+    return {
+      rewardsData: this.$store.state.claimData,
+      rewardsAvailable: false,
+      rewardCollected: false,
+      totalRewards: 2,
+      isShowPopUp: false,
+      selectClaim: null,
+      RewardCardData: [
+        {
+          id: "rewards-1",
+          tittle: "$25 Promo Credits",
+          path: img1,
+        },
+        {
+          id: "rewards-2",
+          tittle: "1 Custom Model",
+          path: img2,
+        },
+        {
+          id: "rewards-3",
+          tittle: "Acess to Export Floor + Elevation for 1 month",
+          path: img3,
+        },
+      ],
+    };
+  },
 
-  beforeUpdate() {
-    console.log(this.data);
-    const { rewardsAvailable, rewardCollected, rewards } = this.data;
-    this.rewardsAvailable = rewardsAvailable;
-    this.rewardCollected = rewardCollected;
-    this.rewards = rewards;
+  methods: {
+    handleClick() {
+      this.$store.commit("setCardShow");
+    },
+    showPopUp() {
+      console.log(this.rewardsData.rewards);
+
+      let updateData = this.$store.state.dummyData.map((val) => {
+        if (val.refereeId === this.rewardsData.refereeId) {
+          val.rewards -= this.selectClaim;
+
+          // if (val.rewards === 0) {
+          // val.userTrackProgress.rewardsAvailable = false;
+          // }
+        }
+        return val;
+      });
+      this.$store.state.dummyData = updateData;
+      this.rewardsAvailable = false;
+      this.rewardsData.rewardsAvailable = !this.rewardsData.rewardsAvailable;
+      console.log(this.$store.state.dummyData);
+      // this.rewardsData.rewards -= this.selectClaim;
+      // if (
+      //   this.rewardsData.rewards > 0 &&
+      //   this.selectClaim <= this.rewardsData.rewards
+      // ) {
+      //   this.rewards.rewards -= this.selectClaim;
+      // } else {
+      //   this.rewards.rewards = 0;
+      // }
+      // console.log(this.rewardsData.rewards);
+      this.$store.commit("updataData", this.rewardsData);
+
+      setTimeout(() => {
+        this.isShowPopUp = !this.isShowPopUp;
+        this.$store.commit("isShowPopUp");
+      }, 300);
+    },
+    radioOptionData(data) {
+      this.selectClaim = data.length;
+    },
+  },
+
+  beforeMount() {
+    if (this.rewardsData) {
+      const { userTrackProgress, rewardCollected, rewards } = this.rewardsData;
+      this.rewardsAvailable = userTrackProgress.rewardsAvailable;
+      this.rewardCollected = rewardCollected;
+      this.rewards = rewards;
+    } else {
+      console.log("Data is Not Present Here");
+    }
   },
 };
 </script>
@@ -94,7 +136,7 @@ export default {
 .reward-section {
   width: 100vw;
   background-color: whitesmoke;
-  padding: 14.5rem 0 1.5rem 0;
+  padding: 13rem 0 1.5rem 0;
 }
 
 .rewards-info {

@@ -9,12 +9,37 @@
       </p>
     </div>
     <div class="progress">
-      <ProgressStep
+      <div class="step_container" v-for="step in numOfStep" :key="step">
+        <div class="steps">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            :class="getSvgStatus"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div class="path">
+            <div v-for="nums in 9" :key="nums" :class="getPathStatus"></div>
+          </div>
+        </div>
+        <div class="step-info">
+          <span>STEP {{ step }}</span>
+          <p>{{ arr[step - 1] }}</p>
+        </div>
+      </div>
+      <!-- <ProgressStep
         v-for="num in NumOfObject"
         :key="num"
         :data="data"
         :num="num"
-      ></ProgressStep>
+      ></ProgressStep> -->
       <div class="claim-svg" v-if="!rewardsAvailable">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +63,7 @@
       </div>
       <div class="claim" v-if="rewardsAvailable">
         <div class="cliam_img">
-          <img src="../assets/Gift Box.svg" alt="claim-box-img" />
+          <img src="../assets/GiftBox.svg" alt="claim-box-img" />
         </div>
         <div class="claim-info">
           <div class="claim-para">Rewards Awailable</div>
@@ -59,33 +84,88 @@
 </template>
 
 <script>
-import ProgressStep from "./ProgressStep.vue";
+// import ProgressStep from "./ProgressStep.vue";
 export default {
   props: {
     data: {
       require: true,
     },
   },
-  components: { ProgressStep },
+  // components: { ProgressStep },
   data() {
     return {
-      NumOfObject: null,
+      numOfStep: null,
       rewardsAvailable: false,
       rewardCollected: false,
+      arr: null,
     };
   },
 
   methods: {
     handleClick() {
       this.$store.commit("rewardsAvailable");
+      this.$store.commit("updataClaimData", this.data);
     },
   },
 
   beforeMount() {
     const { rewardCollected, userTrackProgress } = this.data;
-    this.NumOfObject = Object.keys(userTrackProgress).length - 1;
+    this.numOfStep = Object.keys(userTrackProgress).length - 1;
     this.rewardsAvailable = userTrackProgress.rewardsAvailable;
     this.rewardCollected = rewardCollected;
+
+    /*imported */
+    let keys = Object.keys(this.data.userTrackProgress);
+    keys = keys.map((val) => {
+      val = val.charAt(0).toUpperCase() + val.slice(1);
+      return val
+        .toString()
+        .split(/(?=[A-Z])/)
+        .join(" ");
+    });
+
+    this.arr = keys;
+  },
+
+  /*computed imported */
+  computed: {
+    getSvgStatus() {
+      const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
+        this.data.userTrackProgress;
+
+      if (this.num === 1 && referralEmailSent) {
+        return "fill step-svg";
+      } else if (this.num === 2 && userSignedUpForFT && referralEmailSent) {
+        return "fill step-svg";
+      } else if (
+        this.num === 3 &&
+        userSignedUpForNeo &&
+        userSignedUpForFT &&
+        referralEmailSent
+      ) {
+        return "fill step-svg";
+      } else {
+        return "unfill step-svg";
+      }
+    },
+    getPathStatus() {
+      const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
+        this.data.userTrackProgress;
+      if (this.num === 1 && referralEmailSent) {
+        return "dash back--gr";
+      } else if (this.num === 2 && userSignedUpForFT && referralEmailSent) {
+        return "dash back--gr";
+      } else if (
+        this.num === 3 &&
+        userSignedUpForNeo &&
+        userSignedUpForFT &&
+        referralEmailSent
+      ) {
+        return "dash back--gr";
+      } else {
+        return "dash back--or";
+      }
+    },
   },
 };
 </script>
@@ -216,5 +296,73 @@ export default {
     width: 6rem;
     transform: translateY(10%);
   }
+}
+
+/*Imported */
+
+.step_container {
+  flex: 0 0 29%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.steps {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.path {
+  flex: 0 0 90%;
+  display: flex;
+  justify-content: space-between;
+  height: 1px;
+}
+
+.dash {
+  flex: 0 0 10%;
+  height: 1.5px;
+  background-color: green;
+}
+.step-svg {
+  height: 3.8rem;
+  width: 3.8rem;
+}
+
+/* step info */
+.step-info {
+  margin-top: 1.2rem;
+  margin-left: 1rem;
+  font-family: sans-serif;
+}
+.step-info span {
+  margin-top: 1.2rem;
+  font-size: 1rem;
+  font-weight: 350;
+  color: rgb(162, 159, 159);
+}
+.step-info p {
+  margin-top: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+/* Common Classes */
+
+.fill {
+  fill: green;
+  stroke: white;
+}
+.unfill {
+  stroke: orange;
+}
+.back--gr {
+  background-color: green;
+}
+.back--or {
+  background-color: orange;
 }
 </style>

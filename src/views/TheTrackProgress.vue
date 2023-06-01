@@ -16,75 +16,14 @@ import progressBar from "@/components/progressBar.vue";
 export default {
   data() {
     return {
-      progressData: [
-        {
-          name: "ref test 1",
-          email: "xyz@gmail.com",
-          refereeId: "63e364099a87b41c72a4f2145",
-          rewardCollected: false,
-          userTrackProgress: {
-            referralEmailSent: true,
-            userSignedUpForFT: false,
-            userSignedUpForNeo: false,
-            rewardsAvailable: false,
-          },
-        },
-        {
-          name: "Ref test 2",
-          email: "reftest2@yopmail.com",
-          refereeId: "63e364099a87b41c72a4f287",
-          rewardCollected: false,
-          rewards: null,
-          userTrackProgress: {
-            referralEmailSent: true,
-            userSignedUpForFT: true,
-            userSignedUpForNeo: false,
-            rewardsAvailable: false,
-          },
-        },
-        {
-          name: "Ref test 3",
-          email: "reftest1@yopmail.com",
-          refereeId: "63e364099a87b41c72a4f245",
-          rewardCollected: false,
-          rewards: null,
-          userTrackProgress: {
-            referralEmailSent: true,
-            userSignedUpForFT: true,
-            userSignedUpForNeo: true,
-            rewardsAvailable: false,
-          },
-        },
-        {
-          name: "Referral 4",
-          email: "referraltest1@yopmail.com",
-          refereeId: "63e364099a87b41c72a4f293",
-          rewards: 3,
-          rewardCollected: true,
-          userTrackProgress: {
-            referralEmailSent: true,
-            userSignedUpForFT: true,
-            userSignedUpForNeo: true,
-            rewardsAvailable: true,
-          },
-        },
-        {
-          name: "Referral 4",
-          email: "referraltest1@yopmail.com",
-          refereeId: "63e364099a87b41c72a4f293",
-          rewardCollected: false,
-          rewards: 5,
-          userTrackProgress: {
-            referralEmailSent: true,
-            userSignedUpForFT: true,
-            userSignedUpForNeo: true,
-            rewardsAvailable: true,
-          },
-        },
-      ],
+      progressData: this.$store.state.dummyData,
     };
   },
   components: { progressBar },
+
+  mounted() {
+    this.progressData = this.$store.state.dummyData;
+  },
 };
 </script>
 
