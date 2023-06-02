@@ -2,6 +2,8 @@
   <section class="faq-section">
     <div class="center">
       <h2 class="heading">Frequently Asked Questions</h2>
+
+      <!-- Question data will be render here..! -->
       <questio-carousel :Datas="Datas" />
     </div>
   </section>
@@ -14,6 +16,7 @@ export default {
   components: { QuestioCarousel },
   data() {
     return {
+      // Array foe adding question and Answer here..!
       Datas: [
         {
           tittle: "How many people can i refer?",

@@ -1,6 +1,7 @@
 <template>
   <article class="article">
     <div class="referCard_container ref-card">
+      <!-- Card -->
       <div class="card">
         <h2 class="card-heading">Refer a Friend</h2>
         <input
@@ -14,6 +15,8 @@
         </button>
         <p class="card-para">You will recieve upto 50% off on plans!</p>
       </div>
+
+      <!-- cancel the card button -->
       <div class="card-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,6 +35,8 @@
         </svg>
       </div>
     </div>
+
+    <!-- cancel div btn -->
     <div class="blur-div" @click="handleClick"></div>
   </article>
 </template>
@@ -53,13 +58,14 @@ export default {
 
 <style scoped>
 .blur-div {
-  position: absolute;
+  position: fixed !important;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 
   background-color: rgba(0, 0, 0, 0.332);
+  z-index: 5999;
 }
 .referCard_container {
   width: 50rem;
@@ -135,7 +141,7 @@ button {
 }
 .ref-card {
   z-index: 99999;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

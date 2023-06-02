@@ -1,7 +1,11 @@
 <template>
   <section class="reward-section">
+    <!-- Header Parts -->
     <the-header />
+
+    <!-- The Reward Section will render Here -->
     <div class="center">
+      <!-- Information Data -->
       <div class="rewards-info">
         <h2 class="rewards-heading">Rewards</h2>
         <p class="rewards-para">
@@ -14,23 +18,29 @@
           }}
         </p>
       </div>
+
+      <!-- Rewards Cards  -->
       <RewardCard
         :Reawards="RewardCardData"
         :rewardsAvailable="rewardsAvailable"
         @radioOptionData="radioOptionData"
       ></RewardCard>
 
+      <!-- If user visit to this page first time Or no awards  -->
       <span class="span-btn" v-if="!rewardsAvailable"
         ><button class="main-btn ref-btn" @click="handleClick">
           Refer Now to earn rewards
         </button></span
       >
+
+      <!-- To Added Awards -->
       <span class="span-btn" v-if="rewardsAvailable"
         ><button class="main-btn ref-btn" @click="showPopUp">
           Avail Now
         </button></span
       >
     </div>
+    <!-- reward Added PopUp -->
     <RewardsAdded v-if="this.$store.state.isShowPopUp" />
   </section>
 </template>
@@ -50,11 +60,10 @@ export default {
   },
   data() {
     return {
+      // To check Claim Data
       rewardsData: this.$store.state.claimData,
       rewardsAvailable: false,
       rewardCollected: false,
-      totalRewards: 2,
-      isShowPopUp: false,
       selectClaim: null,
       RewardCardData: [
         {
@@ -90,15 +99,16 @@ export default {
         }
         return val;
       });
-      this.$store.state.dummyData = [...updateData];
-      this.rewardsAvailable = false;
-      this.rewardsData.rewardsAvailable = !this.rewardsData.rewardsAvailable;
 
       setTimeout(() => {
-        this.isShowPopUp = !this.isShowPopUp;
+        this.$store.state.dummyData = [...updateData];
+        this.rewardsAvailable = false;
+        this.rewardsData.rewardsAvailable = !this.rewardsData.rewardsAvailable;
         this.$store.commit("isShowPopUp");
-      }, 300);
+      }, 200);
     },
+
+    // To find out how much rewards collected
     radioOptionData(data) {
       this.selectClaim = data.length;
     },
@@ -111,6 +121,7 @@ export default {
       this.rewardCollected = rewardCollected;
       this.rewards = rewards;
     } else {
+      this.rewardsAvailable = false;
       console.log("Data is Not Present Here");
     }
   },

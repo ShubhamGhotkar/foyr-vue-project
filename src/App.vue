@@ -1,7 +1,12 @@
 <template>
   <div>
+    <!-- common header for All the UI Pages -->
     <the-header></the-header>
+
+    <!-- Router Pages -->
     <router-view></router-view>
+
+    <!-- To render the ReferCard -->
     <ReferCard v-if="this.$store.state.isCardShow"></ReferCard>
   </div>
 </template>

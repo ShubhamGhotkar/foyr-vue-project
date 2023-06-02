@@ -2,6 +2,8 @@
   <section class="progress-track_container">
     <div class="center">
       <h2 class="pregress-heading">Referral Progress</h2>
+
+      <!-- Progress Bar -->
       <progressBar
         v-for="data in progressData"
         :key="data.refereeId"

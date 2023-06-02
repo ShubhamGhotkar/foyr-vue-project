@@ -8,7 +8,10 @@
         <span>EMAIL </span><strong>{{ data.email }}</strong>
       </p>
     </div>
+
+    <!--Progress Component  -->
     <div class="progress">
+      <!-- numOfStep is for find out the length of userTrack length -->
       <div class="step_container" v-for="step in numOfStep" :key="step">
         <div class="steps">
           <svg
@@ -39,6 +42,7 @@
         </div>
       </div>
 
+      <!-- claim box  if Rewards not available-->
       <div class="claim-svg" v-if="!rewardsAvailable">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +64,8 @@
           <p>{{ rewardCollected ? "Reward Collected" : "Reward Available" }}</p>
         </div>
       </div>
+
+      <!-- claim box  if Rewards  available-->
       <div class="claim" v-if="rewardsAvailable">
         <div class="cliam_img">
           <img src="../assets/GiftBox.svg" alt="claim-box-img" />
@@ -105,45 +111,35 @@ export default {
       this.$store.commit("updataClaimData", this.data);
     },
 
-    getPathStatus(num) {
+    newFunct(num, para1, para2) {
       let stepNum = num;
+      // distructure the data
       const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
         this.data.userTrackProgress;
+
       if (stepNum === 1 && referralEmailSent) {
-        return "dash back--gr";
+        return para1;
       } else if (stepNum === 2 && userSignedUpForFT && referralEmailSent) {
-        return "dash back--gr";
+        return para1;
       } else if (
         stepNum === 3 &&
         userSignedUpForNeo &&
         userSignedUpForFT &&
         referralEmailSent
       ) {
-        return "dash back--gr";
+        return para1;
       } else {
-        return "dash back--or";
+        return para2;
       }
+    },
+    getPathStatus(num) {
+      let stepNum = num;
+      return this.newFunct(stepNum, "dash back--gr", "dash back--or");
     },
 
     getSvgStatus(track) {
       let statusPath = track;
-      const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
-        this.data.userTrackProgress;
-
-      if (statusPath === 1 && referralEmailSent) {
-        return "fill step-svg";
-      } else if (statusPath === 2 && userSignedUpForFT && referralEmailSent) {
-        return "fill step-svg";
-      } else if (
-        statusPath === 3 &&
-        userSignedUpForNeo &&
-        userSignedUpForFT &&
-        referralEmailSent
-      ) {
-        return "fill step-svg";
-      } else {
-        return "unfill step-svg";
-      }
+      return this.newFunct(statusPath, "fill step-svg", "unfill step-svg");
     },
   },
 

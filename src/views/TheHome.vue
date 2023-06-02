@@ -1,5 +1,6 @@
 <template>
   <section class="home-section">
+    <!-- The main Home Page Referal Div Render here -->
     <referal-page></referal-page>
   </section>
 </template>
