@@ -74,9 +74,14 @@ a:active {
     font-size: 8px;
   }
 }
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 570px) {
   html {
     font-size: 7px;
+  }
+}
+@media only screen and (max-width: 510px) {
+  html {
+    font-size: 6px;
   }
 }
 </style>

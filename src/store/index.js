@@ -42,7 +42,7 @@ export default new Vuex.Store({
         userTrackProgress: {
           referralEmailSent: true,
           userSignedUpForFT: true,
-          userSignedUpForNeo: true,
+          userSignedUpForNeo: false,
           rewardsAvailable: false,
         },
       },

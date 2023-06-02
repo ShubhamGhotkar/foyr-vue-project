@@ -132,7 +132,7 @@ export default {
 .reward-section {
   width: 100vw;
   background-color: whitesmoke;
-  padding: 13rem 0 1.5rem 0;
+  padding: 13.5rem 0 1.5rem 0;
 }
 
 .rewards-info {
@@ -150,7 +150,7 @@ export default {
 }
 .span-btn {
   width: 100%;
-
+  margin-bottom: 1.2rem;
   display: grid;
   place-items: center;
 }

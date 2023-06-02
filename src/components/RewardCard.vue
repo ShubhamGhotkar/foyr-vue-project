@@ -88,11 +88,12 @@ export default {
   display: flex;
   justify-content: space-between;
   gap: 3rem;
-  padding: 1rem 1rem 1.8rem 1rem;
+  padding: 1rem 1rem 1.4rem 1rem;
   margin: 3rem 0;
 }
 .reward-card_container {
-  flex: 0 0 23%;
+  flex: 0 0 22%;
+  height: max-content;
   background-color: white;
   border-radius: 1.5rem;
   display: flex;
