@@ -81,33 +81,18 @@ export default {
       this.$store.commit("setCardShow");
     },
     showPopUp() {
-      console.log(this.rewardsData.rewards);
-
       let updateData = this.$store.state.dummyData.map((val) => {
         if (val.refereeId === this.rewardsData.refereeId) {
           val.rewards -= this.selectClaim;
-
-          // if (val.rewards === 0) {
-          // val.userTrackProgress.rewardsAvailable = false;
-          // }
+        }
+        if (val.rewards == 0) {
+          val.userTrackProgress.rewardsAvailable = false;
         }
         return val;
       });
-      this.$store.state.dummyData = updateData;
+      this.$store.state.dummyData = [...updateData];
       this.rewardsAvailable = false;
       this.rewardsData.rewardsAvailable = !this.rewardsData.rewardsAvailable;
-      console.log(this.$store.state.dummyData);
-      // this.rewardsData.rewards -= this.selectClaim;
-      // if (
-      //   this.rewardsData.rewards > 0 &&
-      //   this.selectClaim <= this.rewardsData.rewards
-      // ) {
-      //   this.rewards.rewards -= this.selectClaim;
-      // } else {
-      //   this.rewards.rewards = 0;
-      // }
-      // console.log(this.rewardsData.rewards);
-      this.$store.commit("updataData", this.rewardsData);
 
       setTimeout(() => {
         this.isShowPopUp = !this.isShowPopUp;
@@ -119,7 +104,7 @@ export default {
     },
   },
 
-  beforeMount() {
+  mounted() {
     if (this.rewardsData) {
       const { userTrackProgress, rewardCollected, rewards } = this.rewardsData;
       this.rewardsAvailable = userTrackProgress.rewardsAvailable;

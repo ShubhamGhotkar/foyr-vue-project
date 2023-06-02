@@ -17,7 +17,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            :class="getSvgStatus"
+            :class="getSvgStatus(step)"
           >
             <path
               stroke-linecap="round"
@@ -26,7 +26,11 @@
             />
           </svg>
           <div class="path">
-            <div v-for="nums in 9" :key="nums" :class="getPathStatus"></div>
+            <div
+              v-for="nums in 9"
+              :key="nums"
+              :class="getPathStatus(step)"
+            ></div>
           </div>
         </div>
         <div class="step-info">
@@ -34,12 +38,7 @@
           <p>{{ arr[step - 1] }}</p>
         </div>
       </div>
-      <!-- <ProgressStep
-        v-for="num in NumOfObject"
-        :key="num"
-        :data="data"
-        :num="num"
-      ></ProgressStep> -->
+
       <div class="claim-svg" v-if="!rewardsAvailable">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +46,7 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="svg-icon"
+          :class="isRewardCollected"
         >
           <path
             stroke-linecap="round"
@@ -58,7 +57,7 @@
 
         <div class="step-info">
           <span>STEP 4</span>
-          <p>claim available</p>
+          <p>{{ rewardCollected ? "Reward Collected" : "Reward Available" }}</p>
         </div>
       </div>
       <div class="claim" v-if="rewardsAvailable">
@@ -84,14 +83,13 @@
 </template>
 
 <script>
-// import ProgressStep from "./ProgressStep.vue";
 export default {
   props: {
     data: {
       require: true,
     },
   },
-  // components: { ProgressStep },
+
   data() {
     return {
       numOfStep: null,
@@ -105,6 +103,47 @@ export default {
     handleClick() {
       this.$store.commit("rewardsAvailable");
       this.$store.commit("updataClaimData", this.data);
+    },
+
+    getPathStatus(num) {
+      let stepNum = num;
+      const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
+        this.data.userTrackProgress;
+      if (stepNum === 1 && referralEmailSent) {
+        return "dash back--gr";
+      } else if (stepNum === 2 && userSignedUpForFT && referralEmailSent) {
+        return "dash back--gr";
+      } else if (
+        stepNum === 3 &&
+        userSignedUpForNeo &&
+        userSignedUpForFT &&
+        referralEmailSent
+      ) {
+        return "dash back--gr";
+      } else {
+        return "dash back--or";
+      }
+    },
+
+    getSvgStatus(track) {
+      let statusPath = track;
+      const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
+        this.data.userTrackProgress;
+
+      if (statusPath === 1 && referralEmailSent) {
+        return "fill step-svg";
+      } else if (statusPath === 2 && userSignedUpForFT && referralEmailSent) {
+        return "fill step-svg";
+      } else if (
+        statusPath === 3 &&
+        userSignedUpForNeo &&
+        userSignedUpForFT &&
+        referralEmailSent
+      ) {
+        return "fill step-svg";
+      } else {
+        return "unfill step-svg";
+      }
     },
   },
 
@@ -127,44 +166,9 @@ export default {
     this.arr = keys;
   },
 
-  /*computed imported */
   computed: {
-    getSvgStatus() {
-      const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
-        this.data.userTrackProgress;
-
-      if (this.num === 1 && referralEmailSent) {
-        return "fill step-svg";
-      } else if (this.num === 2 && userSignedUpForFT && referralEmailSent) {
-        return "fill step-svg";
-      } else if (
-        this.num === 3 &&
-        userSignedUpForNeo &&
-        userSignedUpForFT &&
-        referralEmailSent
-      ) {
-        return "fill step-svg";
-      } else {
-        return "unfill step-svg";
-      }
-    },
-    getPathStatus() {
-      const { referralEmailSent, userSignedUpForFT, userSignedUpForNeo } =
-        this.data.userTrackProgress;
-      if (this.num === 1 && referralEmailSent) {
-        return "dash back--gr";
-      } else if (this.num === 2 && userSignedUpForFT && referralEmailSent) {
-        return "dash back--gr";
-      } else if (
-        this.num === 3 &&
-        userSignedUpForNeo &&
-        userSignedUpForFT &&
-        referralEmailSent
-      ) {
-        return "dash back--gr";
-      } else {
-        return "dash back--or";
-      }
+    isRewardCollected() {
+      return this.rewardCollected ? "svg-icon svg--gr" : "svg-icon";
     },
   },
 };
@@ -251,6 +255,10 @@ export default {
   height: 3.8rem;
   width: 3.8rem;
   stroke: orange;
+}
+
+.svg--gr {
+  stroke: green;
 }
 
 .inactive {

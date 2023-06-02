@@ -22,7 +22,7 @@ export default {
   components: { progressBar },
 
   mounted() {
-    this.progressData = this.$store.state.dummyData;
+    this.progressData = [...this.$store.state.dummyData];
   },
 };
 </script>
